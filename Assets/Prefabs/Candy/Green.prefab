@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 432096}
   - component: {fileID: 21298344}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: snake
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 5840662}
   - component: {fileID: 5070080}
   - component: {fileID: 11469978}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: Green
   m_TagString: snake
   m_Icon: {fileID: 0}

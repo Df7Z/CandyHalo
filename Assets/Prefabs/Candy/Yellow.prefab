@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5807020}
   - component: {fileID: 5010872}
   - component: {fileID: 11453608}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: Yellow
   m_TagString: giraffe
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   m_Component:
   - component: {fileID: 429264}
   - component: {fileID: 21239032}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: giraffe
   m_TagString: Untagged
   m_Icon: {fileID: 0}

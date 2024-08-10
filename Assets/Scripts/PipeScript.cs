@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Transactions;
 using UnityEngine.UI;
 
 public class PipeScript : MonoBehaviour {
@@ -9,8 +10,11 @@ public class PipeScript : MonoBehaviour {
     private bool moving = false;   
 
     private AudioSource sound;  
-    public AudioClip[] clips; 
-   
+    public AudioClip[] clips;
+
+    private const float STEP = 1.1f; // 1.5f;
+    private const float DISTANCE_TO_RESET =3.85f; //5.25f;
+    
     void Start ()
     {
        
@@ -21,14 +25,14 @@ public class PipeScript : MonoBehaviour {
 	void Update ()
     {
        
-        if (transform.position.x > 5.25f)
+        if (transform.position.x > DISTANCE_TO_RESET)
         {
-            transform.position = new Vector3(-5.25f, transform.position.y);
+            transform.position = new Vector3(-DISTANCE_TO_RESET, transform.position.y);
         }
-
-        if (transform.position.x < -5.25f)
+    
+        if (transform.position.x < -DISTANCE_TO_RESET)
         {
-            transform.position = new Vector3(5.25f, transform.position.y);
+            transform.position = new Vector3(DISTANCE_TO_RESET, transform.position.y);
         }
     }
 
@@ -58,7 +62,7 @@ public class PipeScript : MonoBehaviour {
     public void MoveRight()
     {
         Vector3 lastPos = transform.position;
-        Vector3 newPos = new Vector3(lastPos.x + 1.5f, lastPos.y);
+        Vector3 newPos = new Vector3(lastPos.x + STEP, lastPos.y);
 
         StartCoroutine(MoveFromTo(lastPos, newPos, 0.2f));
     }
@@ -66,7 +70,7 @@ public class PipeScript : MonoBehaviour {
     public void MoveLeft()
     {
         Vector3 lastPos = transform.position;
-        Vector3 newPos = new Vector3(lastPos.x - 1.5f, lastPos.y);
+        Vector3 newPos = new Vector3(lastPos.x - STEP, lastPos.y);
 
         StartCoroutine(MoveFromTo(lastPos, newPos, 0.2f));
     }

@@ -4,9 +4,5 @@ using UnityEngine;
 
 public class HideText : MonoBehaviour
 {
-  
-    public void HideRewardText()
-    {
-        gameObject.SetActive(false);
-    }
+    
 }

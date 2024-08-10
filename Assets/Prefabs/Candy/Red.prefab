@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5898102}
   - component: {fileID: 5020424}
   - component: {fileID: 11444122}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: Red
   m_TagString: parrot
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   m_Component:
   - component: {fileID: 426856}
   - component: {fileID: 21232988}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: parrot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
