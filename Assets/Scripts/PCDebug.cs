@@ -7,7 +7,7 @@ public class PCDebug : MonoBehaviour
 {
     public UnityEngine.UI.Button Left;
     public UnityEngine.UI.Button Right;
-
+#if UNITY_EDITOR
     // Update is called once per frame
     void Update()
     {
@@ -21,4 +21,5 @@ public class PCDebug : MonoBehaviour
             Right.onClick.Invoke();
         }
     }
+#endif
 }

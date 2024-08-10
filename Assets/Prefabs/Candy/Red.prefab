@@ -127,6 +127,7 @@ GameObject:
   m_Component:
   - component: {fileID: 426856}
   - component: {fileID: 21232988}
+  - component: {fileID: 2414191201773239603}
   m_Layer: 6
   m_Name: parrot
   m_TagString: Untagged
@@ -201,3 +202,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2414191201773239603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a143f0efe53971468050a5fed3bfa7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  f1: -5
+  f2: 5
