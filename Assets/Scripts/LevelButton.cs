@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class LevelButton : MonoBehaviour
 {
     public Transform LockTransform;
+    public Transform UnlockTransform;
     public Button Button;
     public TextMeshProUGUI TextMesh;
 
@@ -26,11 +27,13 @@ public class LevelButton : MonoBehaviour
         if (isLock)
         {
             LockTransform.gameObject.SetActive(true);
+            UnlockTransform.gameObject.SetActive(false);
             Button.interactable = false;
             return;
         }
         else
         {
+            UnlockTransform.gameObject.SetActive(true);
             LockTransform.gameObject.SetActive(false);
             Button.interactable = true;
         }

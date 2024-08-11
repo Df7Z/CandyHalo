@@ -51,6 +51,11 @@ public class MainMenu : MonoBehaviour
 
         }
     }
+
+    public void PlaySound()
+    {
+        sound.Play();
+    }
     
     void PlayBtn()
     {

@@ -232,6 +232,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameScene
       objectReference: {fileID: 0}
+    - target: {fileID: 2882996988670233855, guid: c815f0578bc5d694faec500527d3b786, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882996988670233855, guid: c815f0578bc5d694faec500527d3b786, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882996988670233855, guid: c815f0578bc5d694faec500527d3b786, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3494477044735981513, guid: c815f0578bc5d694faec500527d3b786, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3494477044735981513, guid: c815f0578bc5d694faec500527d3b786, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3494477044735981513, guid: c815f0578bc5d694faec500527d3b786, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
