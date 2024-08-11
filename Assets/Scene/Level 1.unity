@@ -232,6 +232,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameScene
       objectReference: {fileID: 0}
+    - target: {fileID: 2524456335459666040, guid: c815f0578bc5d694faec500527d3b786, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 16.217041
+      objectReference: {fileID: 0}
     - target: {fileID: 2882996988670233855, guid: c815f0578bc5d694faec500527d3b786, type: 3}
       propertyPath: m_LocalScale.x
       value: 0
