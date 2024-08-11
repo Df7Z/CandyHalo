@@ -41,6 +41,8 @@ public class SpawnerController : MonoBehaviour {
             SelectAnimal();
         }
 
+        time = time * GameManager.instance.GetLevelConfig().Difficultly;
+        
         StartCoroutine(WaitForNextSpawn());
     }
 	
@@ -54,11 +56,11 @@ public class SpawnerController : MonoBehaviour {
     {
         float timeVal = time;
 
-        if (GameManager.instance.currentScore <= 10)
+        if (GameManager.instance.currentScore <= GameManager.instance.GetLevelConfig().ScoreX2Speed)
         {
             timeVal = time;
         }
-        else if (GameManager.instance.currentScore > 10 /*&& GameManager.instance.currentScore <= 15*/)
+        else if (GameManager.instance.currentScore > GameManager.instance.GetLevelConfig().ScoreX2Speed /*&& GameManager.instance.currentScore <= 15*/)
         {
             int i = Random.Range(0, 3);
 
@@ -68,7 +70,7 @@ public class SpawnerController : MonoBehaviour {
             }
             else
             {
-                timeVal = 0.8f;
+                timeVal = time / 2;
             }
         }
 

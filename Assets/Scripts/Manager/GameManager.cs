@@ -3,9 +3,9 @@ using System.Collections;
 using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-/// <summary>
-/// This script helps in saving and loading data in device
-/// </summary>
+using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
+
 public class GameManager : MonoBehaviour {
 
     public static GameManager instance;
@@ -20,7 +20,43 @@ public class GameManager : MonoBehaviour {
     public int hiScore, points, textureStyle;
 
     public bool[] textureUnlocked;
-  
+
+    public int LastLevelIndex = 1;
+
+    [FormerlySerializedAs("LevelConfigs")] [SerializeField] private LevelConfig[] _levelConfigs;
+
+    public LevelConfig[] LevelConfigs => _levelConfigs;
+
+    public LevelConfig GetLevelConfig() => _levelConfigs[SceneManager.GetActiveScene().buildIndex];
+    public void NextLevel()
+    {
+        var next = SceneManager.GetActiveScene().buildIndex + 1;
+        
+        GameManager.instance.isGameOver = false;
+        
+        if (next > SceneManager.sceneCountInBuildSettings - 1)
+        {
+            SceneManager.LoadScene(0);
+            return;
+        }
+
+        if (next > LastLevelIndex) LastLevelIndex = next;    
+        
+        Save();
+        
+        SceneManager.LoadScene(next);
+    }
+
+    public void LoadLevel(int index)
+    {
+        if (index > _levelConfigs.Length - 1)
+        {
+            index = _levelConfigs.Length - 1;
+        }
+        
+        SceneManager.LoadScene(index);
+    }
+    
     void Awake()
     {
         MakeInstance();
@@ -59,6 +95,7 @@ public class GameManager : MonoBehaviour {
         {
             isGameStartedFirstTime = true;
         }
+        
         if (isGameStartedFirstTime)
         {
             //when game is started for 1st time on device we set the initial values
@@ -84,6 +121,8 @@ public class GameManager : MonoBehaviour {
             data.setTexture(textureStyle);
             data.setTextureUnlocked(textureUnlocked);
            
+            data.SetLastLevel(LastLevelIndex);
+            
             Save();
             Load();
         }
@@ -96,7 +135,7 @@ public class GameManager : MonoBehaviour {
             points = data.getPoints();
             textureStyle = data.getTexture();
             textureUnlocked = data.getTextureUnlocked();
-            
+            LastLevelIndex =  data.GetLastLevel();
         }
     }
 
@@ -117,7 +156,8 @@ public class GameManager : MonoBehaviour {
                 data.setTexture(textureStyle);
                 data.setTextureUnlocked(textureUnlocked);
                 data.setIsMusicOn(isMusicOn);
-             
+                data.SetLastLevel(LastLevelIndex);
+                
                 bf.Serialize(file, data);
             }
         }
@@ -138,6 +178,7 @@ public class GameManager : MonoBehaviour {
         try
         {
             BinaryFormatter bf = new BinaryFormatter();
+          
             file = File.Open(Application.persistentDataPath + "/GameInfo.dat", FileMode.Open);//here we get saved file
             data = (GameData)bf.Deserialize(file);
         }
@@ -150,6 +191,8 @@ public class GameManager : MonoBehaviour {
             }
         }
     }
+
+  
 }
 
 [Serializable]
@@ -159,7 +202,8 @@ class GameData
     private bool isMusicOn;
     private int hiScore, points, textureStyle;
     private bool[] textureUnlocked;
-
+    private int lastLevelIndex = 1;
+        
 
     public void setIsGameStartedFirstTime(bool isGameStartedFirstTime)
     {
@@ -215,6 +259,9 @@ class GameData
     {
         return textureStyle;
     }
+
+    public void SetLastLevel(int lastLevelIndex) => this.lastLevelIndex = lastLevelIndex;
+    public int GetLastLevel() => lastLevelIndex;
 
     //texture unlocked
     public void setTextureUnlocked(bool[] textureUnlocked)

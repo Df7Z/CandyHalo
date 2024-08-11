@@ -13,8 +13,10 @@ public class MainMenu : MonoBehaviour
 
     public Text bestScore;
     [SerializeField]
-    private Sprite[] soundBtnSprites; 
+    private Sprite[] soundBtnSprites;
 
+    public Transform TutorialTransform;
+    
     public Button playBtn;
     public Button soundBtn, slideBtn;
     public string gameScene;
@@ -53,9 +55,30 @@ public class MainMenu : MonoBehaviour
     void PlayBtn()
     {
         sound.Play();
-        SceneManager.LoadScene(gameScene);
+
+        if (GameManager.instance.LastLevelIndex > 1)
+        {
+            GameManager.instance.LoadLevel(GameManager.instance.LastLevelIndex);
+        }
+        else
+        {
+            OpenTutorial();
+        }
+        
+        //SceneManager.LoadScene(gameScene);
     }
 
+    private void OpenTutorial()
+    {
+        TutorialTransform.gameObject.SetActive(true);
+    }
+    
+    public void TutorialOK()
+    {
+        GameManager.instance.LoadLevel(1);
+    }
+
+    
     
     void SoundBtn()
     {

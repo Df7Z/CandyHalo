@@ -42,7 +42,7 @@ public class AnimalController : MonoBehaviour {
 	
 	void FixedUpdate ()
     {
-       
+        
         if (GameManager.instance.isGameOver)
         {
             myBody.isKinematic = true;
