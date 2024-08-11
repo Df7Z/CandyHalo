@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Core.Game.GamePopWindow;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,16 +11,19 @@ using UnityEngine.UI;
 
 public class LevelMenu : MonoBehaviour
 {
-    public Transform MenuTransform;
+   // public Transform MenuTransform;
     
     public Button BackButton;
 
-
+    public MainMenu MainMenu;
  
 
     public Transform buttonsTransform;
     public LevelButton LevelButtonPrefab;
 
+    [SerializeField] private WindowScaleAnimationSettings _windowScaleAnimationSettings;
+    
+    private WindowScaleAnimation _windowScaleAnimation;
    
     
     private void Start()
@@ -28,6 +32,12 @@ public class LevelMenu : MonoBehaviour
         
         //loadSave
         int lastLevelIndex = GameManager.instance.LastLevelIndex;
+        
+        foreach (Transform g in buttonsTransform.GetComponentsInChildren<Transform>())
+        {
+            g.gameObject.SetActive(false);
+        }
+        buttonsTransform.gameObject.SetActive(true);
         
         for (int i = 0; i < LevelCount; i++)
         {
@@ -41,22 +51,36 @@ public class LevelMenu : MonoBehaviour
             b.Init(i + 1, isLock);
             b.OnClick += OnSelectLevel;
         }
+
+        _windowScaleAnimation = new WindowScaleAnimation(_windowScaleAnimationSettings);
         
         BackButton.onClick.AddListener(Close);
     }
 
     public void Open()
     {
-        MenuTransform.gameObject.SetActive(true);
+        //MenuTransform.gameObject.SetActive(true);
+        _windowScaleAnimation.Raise();
     }
 
     public void Close()
     {
-        MenuTransform.gameObject.SetActive(false);
+        _windowScaleAnimation.Lower();
+       // MenuTransform.gameObject.SetActive(false);
+        
     }
 
     private void OnSelectLevel(int level)
     {
+        if (level == 1)
+        {
+            Close();
+            
+            MainMenu.OpenTutorial();
+
+            return;
+        }
+        
         SceneManager.LoadScene(level);
     }
 }

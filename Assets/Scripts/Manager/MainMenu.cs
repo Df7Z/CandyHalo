@@ -1,28 +1,40 @@
 ﻿using System;
 using UnityEngine;
-using System.Collections;
+
+using Core.Game.GamePopWindow;
+using Game.TextMeshProExtenstion;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class MainMenu : MonoBehaviour
 {
     
     private AudioSource sound;
-
+    [SerializeField] private AudioClip[] PrintSound;
 
     public Text bestScore;
     [SerializeField]
     private Sprite[] soundBtnSprites;
-
+    public Transform MainMenuTransform;
     public Transform TutorialTransform;
     
     public Button playBtn;
+    public Button ExitButton;
     public Button soundBtn, slideBtn;
     public string gameScene;
     
     private bool hidden;
     private bool canTouchSlideButton;
+
+    [SerializeField] private WindowScaleAnimationSettings _windowScaleAnimationSettingsOpenTutorial;
+    [SerializeField] private AnimatedPrinterSettings _animatedPrinterSettingsTutorial;
+    
+    private WindowScaleAnimation _windowScaleAnimationOpenTutorial;
+
+    private void OnDestroy()
+    {
+        _animatedPrinter?.Terminate();
+    }
 
     void Start()
     {
@@ -31,12 +43,17 @@ public class MainMenu : MonoBehaviour
         hidden = true;
         sound = GetComponent<AudioSource>();
        
-        playBtn.GetComponent<Button>().onClick.AddListener(() => { PlayBtn(); });    
-      
+        playBtn.GetComponent<Button>().onClick.AddListener(() => { PlayBtn(); });
 
+        _windowScaleAnimationOpenTutorial = new WindowScaleAnimation(_windowScaleAnimationSettingsOpenTutorial);
 
         soundBtn.GetComponent<Button>().onClick.AddListener(() => { SoundBtn(); });  
        
+        ExitButton.onClick.AddListener((() =>
+        {
+            Debug.Log("Exit");
+            Application.Quit();
+        }));
 
         
         if (PlayerPrefs.GetInt("gameMuted") == 0)
@@ -73,9 +90,21 @@ public class MainMenu : MonoBehaviour
         //SceneManager.LoadScene(gameScene);
     }
 
-    private void OpenTutorial()
+    private AnimatedPrinter _animatedPrinter;
+    
+    public void OpenTutorial()
     {
+        sound.Play();
+        
         TutorialTransform.gameObject.SetActive(true);
+
+        _animatedPrinter = new AnimatedPrinter(_animatedPrinterSettingsTutorial);
+        _animatedPrinter.OnPrint += () => { sound.PlayOneShot(PrintSound[Random.Range(0, PrintSound.Length - 1)]); };
+        _animatedPrinter.Start();
+        
+        _windowScaleAnimationOpenTutorial.Raise();
+    //    MainMenuTransform.gameObject.SetActive(false);
+    
     }
     
     public void TutorialOK()

@@ -1,0 +1,16 @@
+{
+    "name": "Game.Time",
+    "rootNamespace": "",
+    "references": [
+        "GUID:8b48b3817f334a649ba368827aa55391"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

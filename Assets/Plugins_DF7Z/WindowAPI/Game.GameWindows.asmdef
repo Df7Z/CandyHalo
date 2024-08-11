@@ -1,0 +1,19 @@
+{
+    "name": "Game.GameWindows",
+    "rootNamespace": "",
+    "references": [
+        "Game.StateMachineCustom",
+        "MonoCache",
+        "SystemPool",
+        "Game.Time"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
